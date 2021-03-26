@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
-# skip_before_action :require_login
+skip_before_action :authorized
 
     def index
         books = Book.all
