@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  resources :books
+  resources :books, only: [:index, :show]
+  resources :reviews, only: [:create, :update, :destroy]
+  resources :users, only: [:index, :create]
+  post '/login', to: 'auth#login'
+  get '/auto_login', to: 'auth#auto_login'
+  get '/user_is_authed', to: 'auth#user_is_authed'
 
-  resources :reviews
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
