@@ -7,8 +7,8 @@ class UsersController < ApplicationController
     end
   
     def profile
-        render json: { user: UserSerializer.new(current_user) }, status: :accepted
-      end
+        render json: { user: UserSerializer.new(current_user)}, status: :accepted
+    end
     
     def create
       @user = User.create(username: params[:username], password: params[:password], password_confirmation: params[:password_confirmation])
@@ -17,6 +17,38 @@ class UsersController < ApplicationController
         render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
       else
         render json: { error: 'failed to create user' }, status: :not_acceptable
+      end
+    end
+
+    def update
+      user = current_user
+      book = Book.find(params[:id])
+
+      if params[:favorite] == "true"
+          if !user.books.include?(book)
+              user.books << book
+          else
+              favorite = FavoriteBook.create(user_id: user.id, book_id: book.id)
+              if user.save
+                  user.save
+                  render json: { favoriteBook: book.id, message: "favorite added!"}
+              else
+                  render json: { message: "add_favorite failed :(" }
+              end
+          end
+      else
+          if user.books.include?(books)
+              user.books - [book]
+              if FavoriteBook.find_by(:book_id => book.id, :user_id => user.id)
+                  FavoriteBook.find_by(:book_id => book.id, :user_id => user.id).destroy
+                  if user.save
+                      user.save
+                      render json: { message: "favorite removed!"}
+                  else
+                      render json: { message: "removing favorite failed :("}
+                  end
+              end
+          end
       end
     end
 

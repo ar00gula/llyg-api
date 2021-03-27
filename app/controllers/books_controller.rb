@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-
+# I am choosing not to do strong params for time, they will be added before this app goes live
 skip_before_action :authorized
 
     def index
@@ -7,7 +7,7 @@ skip_before_action :authorized
         render json: books.to_json(:include => [:author, :reviews])
     end
 
-private
+    
 
 end
 
