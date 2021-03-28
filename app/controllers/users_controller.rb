@@ -22,22 +22,23 @@ class UsersController < ApplicationController
 
     def update
       user = current_user
-      book = Book.find(params[:id])
+      book = Book.find(params[:book_id])
 
-      if params[:favorite] == "true"
+      if params[:favorite] === true
           if !user.books.include?(book)
               user.books << book
+              render json: { favoriteBook: BookSerializer.new(book), message: "favorite added!" }
           else
               favorite = FavoriteBook.create(user_id: user.id, book_id: book.id)
               if user.save
                   user.save
-                  render json: { favoriteBook: book.id, message: "favorite added!"}
+                  render json: { favoriteBook: BookSerializer.new(book), message: "favorite added!"}
               else
                   render json: { message: "add_favorite failed :(" }
               end
           end
       else
-          if user.books.include?(books)
+          if user.books.include?(book)
               user.books - [book]
               if FavoriteBook.find_by(:book_id => book.id, :user_id => user.id)
                   FavoriteBook.find_by(:book_id => book.id, :user_id => user.id).destroy
