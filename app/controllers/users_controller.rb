@@ -27,27 +27,30 @@ class UsersController < ApplicationController
       if params[:favorite] === true
           if !user.books.include?(book)
               user.books << book
-              render json: { favoriteBook: BookSerializer.new(book), message: "favorite added!" }
+              render json: { addBook: BookSerializer.new(book), message: "favorite added!" }
           else
               favorite = FavoriteBook.create(user_id: user.id, book_id: book.id)
               if user.save
                   user.save
-                  render json: { favoriteBook: BookSerializer.new(book), message: "favorite added!"}
+                  render json: { removeBook: BookSerializer.new(book), message: "favorite added!"}
               else
                   render json: { message: "add_favorite failed :(" }
               end
           end
       else
           if user.books.include?(book)
-              user.books - [book]
+              user.books = user.books - [book]
               if FavoriteBook.find_by(:book_id => book.id, :user_id => user.id)
                   FavoriteBook.find_by(:book_id => book.id, :user_id => user.id).destroy
                   if user.save
                       user.save
-                      render json: { message: "favorite removed!"}
+                      render json: { removeBook: BookSerializer.new(book), message: "favorite removed!"}
                   else
                       render json: { message: "removing favorite failed :("}
                   end
+              else
+                # byebug
+                render json: { removeBook: BookSerializer.new(book), message: "favorite removed!"}
               end
           end
       end
