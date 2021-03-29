@@ -56,6 +56,18 @@ class UsersController < ApplicationController
       end
     end
 
+    # def currently_reading
+    #   user = current_user
+    #   book = Book.find(params[:book_id])
+    #   if params[:current] === true
+    #       user.current_books.push(book)
+    #       render json: { currentBook: book, message: "current book added" }
+    #   else
+    #     user.current_books - [book]
+    #     render json: {message: "book removed"}
+    #   end
+    # end
+
     def logout
       render json: { success: 'Successful logout'}
     end

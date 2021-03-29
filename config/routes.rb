@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#profile'
   get '/user_is_authed', to: 'auth#user_is_authed'
   get '/logout', to: 'users#logout'
+  patch '/user/current', to: 'users#currently_reading'
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
