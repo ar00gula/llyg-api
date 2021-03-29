@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
             render json: {
                 bookId: review.book_id,
                 review: {
-                    user: review.user,
+                    user: review.user.username,
                     title: review.title,
                     content: review.content,
                     date: review.date
