@@ -8,8 +8,8 @@ This is the repository for the backend of the app. In your terminal, navigate to
 bundle install
 rails s
 
-You will also have to download the sister repositiory to initialize the backend.
-https://github.com/ar00gula/llyg-api
+You will also have to download the sister repositiory to initialize the frontend.
+https://github.com/ar00gula/llyg-frontend
 
 Development
 This app is currently under development and will continue to grow as I learn more about JavaScript frameworks.
