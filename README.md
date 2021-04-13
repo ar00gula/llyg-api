@@ -1,24 +1,23 @@
-# README
+Repository for my Flatiron School final project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to working title LLYG (short for Long Live Yr Gays), a lightly social,  user-driven archive for queer romance authors and novels.
 
-Things you may want to cover:
+Installation/Usage
+This is the repository for the backend of the app. In your terminal, navigate to repository after downloading and execute commands: 
 
-* Ruby version
+bundle install
+rails s
 
-* System dependencies
+You will also have to download the sister repositiory to initialize the backend.
+https://github.com/ar00gula/llyg-api
 
-* Configuration
+Development
+This app is currently under development and will continue to grow as I learn more about JavaScript frameworks.
 
-* Database creation
+What's coming next? My immediate plans are... - add tagging and genre functionality - add user-uploads of books - optimize for mobile - resize review boxes
 
-* Database initialization
+Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/ar00gula/llyg-fronted.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+License
+The gem is available as open source under the terms of the MIT License.
